@@ -4,6 +4,7 @@ We have recorded a repeating message signal. This is kept in `input.txt`. Howeve
 
 It is your job to figure out which character is most frequent for each position. For example, suppose we had recorded the following messages:
 
+```
 pedadatwqr
 drvgeerqwv
 eandsrerec
@@ -20,6 +21,7 @@ pntsndwmlg
 vrdeareher
 dvrgeaxfef
 enararmmgv
+```
 
 The most common character in the first column is p; in the second, r; in the third, o, and so on. Combining these characters returns the error-corrected message, programmer.
 
