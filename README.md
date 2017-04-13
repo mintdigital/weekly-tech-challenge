@@ -5,19 +5,19 @@ We have recorded a repeating message signal. This is kept in `input.txt`. Howeve
 It is your job to figure out which character is most frequent for each position. For example, suppose we had recorded the following messages:
 
 ```
-pedadatwqr
+pedaratwqr
 drvgeerqwv
 eandsrerec
 pyovrdrmru
 arevrstmtr
 tsrnevmyyl
-sdttsayuer
+sdttrayuer
 prortamiyk
 nsodtsymur
 ntnadagtik
 svegvahfej
 tesnrtmvph
-pntsndwmlg
+pntsrdwmlg
 vrdeareher
 dvrgeaxfef
 enararmmgv
