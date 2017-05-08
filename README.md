@@ -1,4 +1,4 @@
-# Mint Weekly Tech Challenge
+# Weekly Tech Challenge
 
 Each week one of us will provide a problem to solve, this can be anything from an algorithmic problem, to a problem we have struggled to solve this week, to something that plays with a piece of technology that we have not played with before.
 
