@@ -17,10 +17,13 @@ Create a pull request, describing how you solved the problem and what you would 
 ### FAQ
 
 Q: I don't have enough time to test my solution?
+
 A: This is fine, it is not going into production.
 
 Q: I don't have enough time this week. Can I make up for it next week?
+
 A: Nope, if you miss a week, you don't get it back.
 
 Q: Is there a leaderboard?
+
 A: Not right now, something that could be implemented at a later date though.
