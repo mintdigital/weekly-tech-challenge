@@ -1,5 +1,7 @@
 # Character Frequency
 
+_This challenge is heavily inspired by Advent Of code_
+
 We have recorded a repeating message signal. This is kept in `input.txt`. However, the data seems quite corrupted - almost too badly to recover. **Almost**.
 
 It is your job to figure out which character is most frequent for each position. For example, suppose we had recorded the following messages:

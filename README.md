@@ -1,7 +1,5 @@
 # Weekly Tech Challenge
 
-_This challenge is heavily inspired by Advent Of code_
-
 Each week one of us will provide a problem to solve, this can be anything from an algorithmic problem, to a problem we have struggled to solve this week, to something that plays with a piece of technology that we have not played with before.
 
 The aim is to allow us to learn from each other about how we each choose to solve the problem, we can use new technology that we haven’t used before, different languages, and play around with things outside of our skill set. Ultimately it will push our boundaries and we will be working with tech that we don’t enjoy and tech we love but that is part of the fun.
