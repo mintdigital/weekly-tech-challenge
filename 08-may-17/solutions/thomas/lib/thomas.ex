@@ -1,11 +1,11 @@
 defmodule CharacterFrequency do
   def unscramble(file) do
     stream = File.stream!(file, [:read])
-    data = Enum.reduce(stream, %{}, fn(line, acc) ->
+    columns = Enum.reduce(stream, %{}, fn(line, acc) ->
       count_chars(line, acc)
     end)
 
-    word = Enum.map(Map.values(data), fn(col) ->
+    word = Enum.map(Map.values(columns), fn(col) ->
       pick_winner(col)
     end)
 
