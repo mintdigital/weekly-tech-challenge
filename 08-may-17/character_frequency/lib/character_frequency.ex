@@ -3,8 +3,13 @@ defmodule CharacterFrequency do
   Documentation for CharacterFrequency.
   """
 
+  require EEx
+  EEx.function_from_file(:def, :input, "priv/input.txt")
+
+  def decode(), do: input() |> String.to_charlist() |> decode()
+
   @doc """
-  Decodes given input, by returning the most comman character in each position.
+  Decodes given input, by returning the most common character in each position.
   """
   @spec decode(input :: charlist()) :: charlist()
   def decode(input) do
