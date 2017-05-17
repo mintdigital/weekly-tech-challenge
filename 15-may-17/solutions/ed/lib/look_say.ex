@@ -4,12 +4,12 @@ defmodule LookSay do
   """
 
   @doc """
-  Hello world.
+  Parses given input, returning next member of look and say sequence.
 
   ## Examples
 
-      iex> LookSay.hello
-      :world
+      iex> LookSay.parse('1')
+      '11'
 
   """
   def solve do
