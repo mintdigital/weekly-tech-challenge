@@ -11,6 +11,10 @@ defmodule LookSay do
     binary_parse("111312211382399229999992222441191239988800899922231114444111888223332222999988222288822211177281")
   end
 
+  def stupid_solve do
+    stupid_parse('111312211382399229999992222441191239988800899922231114444111888223332222999988222288822211177281')
+  end
+
   @doc """
   Parses given input, returning next member of look and say sequence.
 
@@ -34,6 +38,14 @@ defmodule LookSay do
   """
   @spec binary_parse(input :: String.t()) :: String.t()
   def binary_parse(input), do: do_binary_parse("", input) |> String.reverse()
+
+  def stupid_parse(input) do
+    input
+    |> Enum.chunk_by(&(&1))
+    |> Enum.flat_map(fn([h|_]=subsequence) ->
+         [h|subsequence |> Enum.count() |> Integer.to_charlist()] |> Enum.reverse()
+       end)
+  end
 
   defp do_charlist_parse(acc, ''), do: acc
   defp do_charlist_parse([char|[count|prev]], [char|next]) do
