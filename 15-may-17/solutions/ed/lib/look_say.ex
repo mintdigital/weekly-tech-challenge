@@ -12,6 +12,10 @@ defmodule LookSay do
       :world
 
   """
+  def solve do
+    parse('111312211382399229999992222441191239988800899922231114444111888223332222999988222288822211177281')
+  end
+
   def parse(input), do: do_parse('', input) |> Enum.reverse()
 
   defp do_parse(acc, ''), do: acc
