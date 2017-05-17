@@ -9,4 +9,9 @@ defmodule LookSayTest do
     assert '111221' = LookSay.parse('1211')
     assert '312211' = LookSay.parse('111221')
   end
+
+  @tag skip: "is this possible with a look and say sequence?"
+  test "parse when more than 9 reps of given number" do
+    assert '101' = LookSay.parse('1111111111')
+  end
 end
