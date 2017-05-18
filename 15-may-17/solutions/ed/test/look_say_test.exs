@@ -3,13 +3,16 @@ defmodule LookSayTest do
   doctest LookSay
   alias LookSay.{CharlistParser, BinaryParser, InferiorParser, RegexParser}
 
+  @charlist_input '111312211382399229999992222441191239988800899922231114444111888223332222999988222288822211177281'
+  @binary_input List.to_string(@charlist_input)
+
   test "parse/2" do
-    assert LookSay.parse(LookSay.charlist_input(), CharlistParser) ==
-           LookSay.parse(LookSay.binary_input(), BinaryParser) |> String.to_charlist()
-    assert LookSay.parse(LookSay.charlist_input(), CharlistParser) ==
-           LookSay.parse(LookSay.charlist_input(), InferiorParser)
-    assert LookSay.parse(LookSay.charlist_input(), CharlistParser) ==
-           LookSay.parse(LookSay.binary_input(), RegexParser) |> String.to_charlist()
+    assert LookSay.parse(@charlist_input, CharlistParser) ==
+           LookSay.parse(@binary_input, BinaryParser) |> String.to_charlist()
+    assert LookSay.parse(@charlist_input, CharlistParser) ==
+           LookSay.parse(@charlist_input, InferiorParser)
+    assert LookSay.parse(@charlist_input, CharlistParser) ==
+           LookSay.parse(@binary_input, RegexParser) |> String.to_charlist()
   end
 
   @tag skip: """
@@ -17,14 +20,11 @@ defmodule LookSayTest do
   of normal suite
   """
   test "benchmark" do
-    charlist = LookSay.charlist_input()
-    binary = LookSay.binary_input()
-
     Benchee.run(%{
-      "charlist" => fn -> CharlistParser.parse(charlist) end,
-      "binary" => fn -> BinaryParser.parse(binary) end,
-      "inferior" => fn -> InferiorParser.parse(charlist) end,
-      "regex" => fn -> RegexParser.parse(binary) end
+      "charlist" => fn -> CharlistParser.parse(@charlist_input) end,
+      "binary" => fn -> BinaryParser.parse(@binary_input) end,
+      "inferior" => fn -> InferiorParser.parse(@charlist_input) end,
+      "regex" => fn -> RegexParser.parse(@binary_input) end
     }, time: 10)
   end
 
