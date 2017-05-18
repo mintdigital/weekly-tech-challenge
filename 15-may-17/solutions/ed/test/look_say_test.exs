@@ -15,10 +15,13 @@ defmodule LookSayTest do
   of normal suite
   """
   test "benchmark" do
+    charlist = LookSay.charlist_input()
+    binary = LookSay.binary_input()
+
     Benchee.run(%{
-      "charlist" => fn -> CharlistParser.parse(LookSay.charlist_input()) end,
-      "binary" => fn -> BinaryParser.parse(LookSay.binary_input()) end,
-      "inferior" => fn -> InferiorParser.parse(LookSay.charlist_input()) end
+      "charlist" => fn -> CharlistParser.parse(charlist) end,
+      "binary" => fn -> BinaryParser.parse(binary) end,
+      "inferior" => fn -> InferiorParser.parse(charlist) end
     }, time: 10)
   end
 
