@@ -1,13 +1,15 @@
 defmodule LookSayTest do
   use ExUnit.Case
   doctest LookSay
-  alias LookSay.{CharlistParser, BinaryParser, InferiorParser}
+  alias LookSay.{CharlistParser, BinaryParser, InferiorParser, RegexParser}
 
   test "parse/2" do
     assert LookSay.parse(LookSay.charlist_input(), CharlistParser) ==
            LookSay.parse(LookSay.binary_input(), BinaryParser) |> String.to_charlist()
     assert LookSay.parse(LookSay.charlist_input(), CharlistParser) ==
            LookSay.parse(LookSay.charlist_input(), InferiorParser)
+    assert LookSay.parse(LookSay.charlist_input(), CharlistParser) ==
+           LookSay.parse(LookSay.binary_input(), RegexParser) |> String.to_charlist()
   end
 
   @tag skip: """
@@ -21,7 +23,8 @@ defmodule LookSayTest do
     Benchee.run(%{
       "charlist" => fn -> CharlistParser.parse(charlist) end,
       "binary" => fn -> BinaryParser.parse(binary) end,
-      "inferior" => fn -> InferiorParser.parse(charlist) end
+      "inferior" => fn -> InferiorParser.parse(charlist) end,
+      "regex" => fn -> RegexParser.parse(binary) end
     }, time: 10)
   end
 

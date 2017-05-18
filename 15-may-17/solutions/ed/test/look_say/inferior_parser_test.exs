@@ -1,5 +1,5 @@
 defmodule LookSay.InferiorParserTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias LookSay.InferiorParser
 
   test "parse/1" do

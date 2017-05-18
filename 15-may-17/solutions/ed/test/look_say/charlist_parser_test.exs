@@ -1,5 +1,5 @@
 defmodule LookSay.CharlistParserTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias LookSay.CharlistParser
 
   test "parse/1" do

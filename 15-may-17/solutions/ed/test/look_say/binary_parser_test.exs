@@ -1,5 +1,5 @@
 defmodule LookSay.BinaryParserTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias LookSay.BinaryParser
 
   test "parse/1" do
