@@ -23,3 +23,7 @@ To give you an example:
 - 111221 becomes 312211 (three 1s, two 2s, and one 1).
 
 The puzzle input is `111312211382399229999992222441191239988800899922231114444111888223332222999988222288822211177281`.
+
+### Acknowledgement
+
+This weeks challenge was copied from [@ericwastl](https://twitter.com/ericwastl)'s Advent of Code - [2015 day 10](http://adventofcode.com/2015/day/10)

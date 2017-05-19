@@ -27,6 +27,6 @@ For example:
 
 It is your job to work out, how many strings are naughty?
 
-### Original Link
+### Acknowledgement
 
 This weeks challenge was copied from [@ericwastl](https://twitter.com/ericwastl)'s Advent of Code - [2015 day 5](http://adventofcode.com/2015/day/5)
