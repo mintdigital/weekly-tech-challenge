@@ -2,7 +2,7 @@ defmodule LookSayTest do
   use ExUnit.Case
   doctest LookSay
   alias LookSay.{CharlistParser, BinaryParser, InferiorParser, RegexParser,
-    StdlibCharlistParser}
+    StdlibCharlistParser, BinaryAltParser}
 
   @charlist_input '111312211382399229999992222441191239988800899922231114444111888223332222999988222288822211177281'
   @binary_input List.to_string(@charlist_input)
@@ -16,6 +16,8 @@ defmodule LookSayTest do
            LookSay.parse(@binary_input, RegexParser) |> String.to_charlist()
     assert LookSay.parse(@charlist_input, CharlistParser) ==
            LookSay.parse(@charlist_input, StdlibCharlistParser)
+    assert LookSay.parse(@charlist_input, CharlistParser) ==
+           LookSay.parse(@binary_input, BinaryAltParser) |> String.to_charlist()
   end
 
   @tag skip: """
@@ -29,7 +31,8 @@ defmodule LookSayTest do
       "binary" => fn -> BinaryParser.parse(@binary_input) end,
       "inferior" => fn -> InferiorParser.parse(@charlist_input) end,
       "regex" => fn -> RegexParser.parse(@binary_input) end,
-      "stdlib_charlist" => fn -> StdlibCharlistParser.parse(@charlist_input) end
+      "stdlib_charlist" => fn -> StdlibCharlistParser.parse(@charlist_input) end,
+      "binary_alt" => fn -> BinaryAltParser.parse(@binary_input) end
     }, time: 10)
   end
 
