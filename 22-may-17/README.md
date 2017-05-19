@@ -21,4 +21,4 @@ For example:
 
 `dvszwmarrgswjxmb` is naughty because it contains only one vowel.
 
-how many strings are nice?
+**Challenge:** how many strings are naughty?
