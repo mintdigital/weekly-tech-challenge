@@ -13,15 +13,11 @@ defmodule NaughtyOrNice do
 
   """
   def nice?(string) do
-    three_vowels?(string) && double_letter?(string) && no_banned?(string)
+    list = String.to_charlist(string)
+    three_vowels?(list) && double_letter?(list) && no_banned?(string)
   end
 
-  defp three_vowels?(string) do
-    count = string
-    |> String.to_charlist
-    |> Enum.count(&is_vowel?/1)
-    count >= 3
-  end
+  defp three_vowels?(list), do: Enum.count(list, &is_vowel?/1) >= 3
 
   defp is_vowel?(?a), do: true
   defp is_vowel?(?e), do: true
@@ -30,7 +26,6 @@ defmodule NaughtyOrNice do
   defp is_vowel?(?u), do: true
   defp is_vowel?(_), do: false
 
-  defp double_letter?(string) when is_binary(string), do: double_letter?(String.to_charlist(string))
   defp double_letter?([char | rest]), do: double_letter?(rest, char, 1)
   defp double_letter?(_, _, 2), do: true
   defp double_letter?([char | rest], char, count), do: double_letter?(rest, char, count + 1)
