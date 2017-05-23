@@ -7,7 +7,6 @@ defmodule NaughtyOrNice.Charlist.Serial do
              &Charlist.two_in_a_row?/1,
              &Charlist.no_invalid_substring?/1]
 
-
     Runner.test(tests, input)
   end
 end

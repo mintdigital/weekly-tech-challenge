@@ -3,7 +3,7 @@ defmodule NaughtyOrNice.TestRunners.Concurrent do
     owner = self()
     funs
     |> Stream.map(fn f ->
-         send(owner, {:test, f.(input)})
+         spawn(fn -> send(owner, {:test, f.(input)}) end)
          receive do
            {:test, result} -> result
          end
