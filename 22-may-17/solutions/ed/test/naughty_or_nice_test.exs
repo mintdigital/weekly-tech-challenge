@@ -2,31 +2,31 @@ defmodule NaughtyOrNiceTest do
   use ExUnit.Case
   doctest NaughtyOrNice
 
-  alias NaughtyOrNice.CharlistParser
+  alias NaughtyOrNice.{Charlist.Serial, Charlist.Concurrent}
 
-  test "test_serial/1" do
-    assert NaughtyOrNice.test_serial(CharlistParser, 'ugknbfddgicrmopn')
-    assert NaughtyOrNice.test_serial(CharlistParser, 'aaa')
-    refute NaughtyOrNice.test_serial(CharlistParser, 'jchzalrnumimnmhp')
-    refute NaughtyOrNice.test_serial(CharlistParser, 'haegwjzuvuyypxyu')
-    refute NaughtyOrNice.test_serial(CharlistParser, 'dvszwmarrgswjxmb')
+  test "test serial" do
+    assert NaughtyOrNice.test(Serial, 'ugknbfddgicrmopn')
+    assert NaughtyOrNice.test(Serial, 'aaa')
+    refute NaughtyOrNice.test(Serial, 'jchzalrnumimnmhp')
+    refute NaughtyOrNice.test(Serial, 'haegwjzuvuyypxyu')
+    refute NaughtyOrNice.test(Serial, 'dvszwmarrgswjxmb')
   end
 
-  test "test_concurrent/1" do
-    assert NaughtyOrNice.test_concurrent(CharlistParser, 'ugknbfddgicrmopn')
-    assert NaughtyOrNice.test_concurrent(CharlistParser, 'aaa')
-    refute NaughtyOrNice.test_concurrent(CharlistParser, 'jchzalrnumimnmhp')
-    refute NaughtyOrNice.test_concurrent(CharlistParser, 'haegwjzuvuyypxyu')
-    refute NaughtyOrNice.test_concurrent(CharlistParser, 'dvszwmarrgswjxmb')
+  test "test concurrent" do
+    assert NaughtyOrNice.test(Concurrent, 'ugknbfddgicrmopn')
+    assert NaughtyOrNice.test(Concurrent, 'aaa')
+    refute NaughtyOrNice.test(Concurrent, 'jchzalrnumimnmhp')
+    refute NaughtyOrNice.test(Concurrent, 'haegwjzuvuyypxyu')
+    refute NaughtyOrNice.test(Concurrent, 'dvszwmarrgswjxmb')
   end
 
-  @skip "benchmark"
+  @tag skip: "benchmark"
   test "benchmark" do
     Benchee.run(%{
       "serial" =>
-        fn -> NaughtyOrNice.test_serial(CharlistParser, 'dvszwmarrgswjxmb') end,
+        fn -> NaughtyOrNice.test(Serial, 'dvszwmarrgswjxmb') end,
       "concurrent" =>
-        fn -> NaughtyOrNice.test_concurrent(CharlistParser, 'dvszwmarrgswjxmb') end
+        fn -> NaughtyOrNice.test(Concurrent, 'dvszwmarrgswjxmb') end
     }, time: 10)
   end
 end
