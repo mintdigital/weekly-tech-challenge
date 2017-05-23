@@ -29,7 +29,7 @@ defmodule NaughtyOrNiceTest do
   end
 
   @tag skip: "benchmark"
-  test "benchmark" do
+  test "benchmark test single" do
     Benchee.run(%{
       "serial" =>
         fn -> NaughtyOrNice.test(Serial, 'dvszwmarrgswjxmb') end,
@@ -37,6 +37,18 @@ defmodule NaughtyOrNiceTest do
         fn -> NaughtyOrNice.test(Concurrent, 'dvszwmarrgswjxmb') end,
       "onepass" =>
         fn -> NaughtyOrNice.test(SinglePass, 'dvszwmarrgswjxmb') end
+    }, time: 10)
+  end
+
+  @tag skip: "benchmark"
+  test "benchmark test many" do
+    input = "priv/input.txt"
+
+    Benchee.run(%{
+      "serial" =>
+        fn -> NaughtyOrNice.count_serial(Serial, input) end,
+      "concurrent" =>
+        fn -> NaughtyOrNice.count_concurrent(Serial, input) end
     }, time: 10)
   end
 end
