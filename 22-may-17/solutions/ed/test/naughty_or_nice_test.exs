@@ -39,9 +39,9 @@ defmodule NaughtyOrNiceTest do
 
     Benchee.run(%{
       "serial" =>
-        fn -> NaughtyOrNice.count_serial(Serial, input) end,
+        fn -> NaughtyOrNice.count_serial(SinglePass, input) end,
       "concurrent" =>
-        fn -> NaughtyOrNice.count_concurrent(Serial, input) end
+        fn -> NaughtyOrNice.count_concurrent(SinglePass, input) end
     }, time: 10)
   end
 end
