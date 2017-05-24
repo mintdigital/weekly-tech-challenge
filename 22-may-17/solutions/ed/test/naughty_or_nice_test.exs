@@ -20,13 +20,6 @@ defmodule NaughtyOrNiceTest do
     refute NaughtyOrNice.test(Concurrent, 'dvszwmarrgswjxmb')
   end
 
-  test "test single pass" do
-    assert NaughtyOrNice.test(SinglePass, 'ugknbfddgicrmopn')
-    assert NaughtyOrNice.test(SinglePass, 'aaa')
-    refute NaughtyOrNice.test(SinglePass, 'jchzalrnumimnmhp')
-    refute NaughtyOrNice.test(SinglePass, 'haegwjzuvuyypxyu')
-    refute NaughtyOrNice.test(SinglePass, 'dvszwmarrgswjxmb')
-  end
 
   @tag skip: "benchmark"
   test "benchmark test single" do
