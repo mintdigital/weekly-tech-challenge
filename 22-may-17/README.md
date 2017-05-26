@@ -25,7 +25,7 @@ For example:
 
 ### Challenge
 
-It is your job to work out, how many strings are naughty?
+It is your job to work out, how many strings are nice?
 
 ### Acknowledgement
 
