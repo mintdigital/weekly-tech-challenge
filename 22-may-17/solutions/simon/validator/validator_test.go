@@ -39,8 +39,14 @@ func TestIsStringNice(t *testing.T) {
 	}
 }
 
-func BenchmarkIsStringNice(b *testing.B) {
+func benchmarkIsStringNice(str string, b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		IsStringNice("dvszwmarrgswjxmb")
+		IsStringNice(str)
 	}
 }
+
+func BenchmarkIsStringNice1(b *testing.B) { benchmarkIsStringNice("aaa", b) }
+func BenchmarkIsStringNice2(b *testing.B) { benchmarkIsStringNice("ugknbfddgicrmopn", b) }
+func BenchmarkIsStringNice3(b *testing.B) { benchmarkIsStringNice("jchzalrnumimnmhp", b) }
+func BenchmarkIsStringNice4(b *testing.B) { benchmarkIsStringNice("haegwjzuvuyypxyu", b) }
+func BenchmarkIsStringNice5(b *testing.B) { benchmarkIsStringNice("dvszwmarrgswjxmb", b) }
