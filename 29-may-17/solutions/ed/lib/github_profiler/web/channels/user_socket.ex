@@ -2,7 +2,7 @@ defmodule GithubProfiler.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", GithubProfiler.Web.RoomChannel
+  channel "typeahead:public", GithubProfiler.Web.TypeaheadChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
