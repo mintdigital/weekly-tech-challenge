@@ -2,7 +2,7 @@ defmodule GithubProfiler.QueryProducerConsumer do
   use GenStage
 
   # Client
-  def start_link(_), do: GenStage.start_link(__MODULE__, :ok)
+  def start_link(), do: GenStage.start_link(__MODULE__, :ok)
 
   # Server
   def init(_), do: {:producer_consumer, %{}}
