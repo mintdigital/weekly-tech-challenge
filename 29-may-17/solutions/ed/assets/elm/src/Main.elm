@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 import WebSocket
 import Json.Encode exposing (..)
+import Json.Decode exposing (..)
 
 main =
   Html.program
@@ -20,14 +21,15 @@ main =
 
 type alias Model =
   { query : String
-  , results : String
+  , results : List User
   }
 
 init : (Model, Cmd Msg)
 init =
   let model =
-    Model "" ""
+    Model "" []
   in update Join model
+
 
 -- UPDATE
 
@@ -42,6 +44,12 @@ type alias Send =
   , event : String
   , payload : String
   , ref : String
+  }
+
+type alias User =
+  { name : String
+  , login : String
+  , avatarUrl : String
   }
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -64,33 +72,43 @@ update msg model =
         )
 
     Results string ->
-      let results =
-        decode string
+      case decodeString (responseDecoder) string of
+        Ok results ->
+          Debug.log "ok"
+          ({ model | results = results }, Cmd.none)
 
-      in
-        ({ model | results = results }, Cmd.none)
+        Err err ->
+          Debug.log err
+          Debug.log "not ok"
+          (model, Cmd.none)
 
 
 encode : Send -> String
 encode search =
   Json.Encode.object
-    [ ("topic", string search.topic )
-    , ("event", string search.event )
+    [ ("topic", Json.Encode.string search.topic )
+    , ("event", Json.Encode.string search.event )
     , ("payload", encodePayload search.payload )
-    , ("ref", string search.ref )
+    , ("ref", Json.Encode.string search.ref )
     ]
   |> Json.Encode.encode 0
 
+responseDecoder : Decoder (List User)
+responseDecoder =
+  at ["payload", "results"] (Json.Decode.list userDecoder)
 
-decode : String -> String
-decode string =
-  string
-
+userDecoder : Decoder User
+userDecoder =
+  map3
+    User
+    (at ["node", "name"] Json.Decode.string)
+    (at ["node", "login"] Json.Decode.string)
+    (at ["node", "avatarUrl"] Json.Decode.string)
 
 encodePayload : String -> Json.Encode.Value
 encodePayload payload =
   Json.Encode.object
-    [ ("query", string payload ) ]
+    [ ("query", Json.Encode.string payload ) ]
 
 
 -- VIEW
@@ -100,8 +118,17 @@ view : Model -> Html Msg
 view model =
   div []
   [ input [type_ "text", placeholder "user", onInput Search ] []
-  , p [] [ text model.results ]
+  , viewResults model.results
   ]
+
+
+viewResults : List User -> Html Msg
+viewResults users =
+  ul []
+  (List.map (\l -> li [] [ h1 [] [text l.name]
+                         , text l.login
+                         , img [src l.avatarUrl] []
+                         ]) users)
 
 
 -- SUBSCRIPTIONS
