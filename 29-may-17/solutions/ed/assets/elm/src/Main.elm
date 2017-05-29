@@ -3,6 +3,7 @@ module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
+import WebSocket
 
 main =
   Html.program
@@ -18,22 +19,28 @@ main =
 
 type alias Model =
   { query : String
+  , results : String
   }
 
 init : (Model, Cmd Msg)
 init =
-  (Model "", Cmd.none)
+  (Model "" "", Cmd.none)
 
 -- UPDATE
 
 
-type Msg = Search String
+type Msg
+  = Search String
+  | Results String
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     Search query ->
-      (Model query, Cmd.none)
+      ({ model | query = query }, WebSocket.send "ws://todo" query)
+
+    Results string ->
+      ({ model | results = string }, Cmd.none)
 
 
 -- VIEW
@@ -52,4 +59,4 @@ view model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.none
+  WebSocket.listen "ws://todo" Results
