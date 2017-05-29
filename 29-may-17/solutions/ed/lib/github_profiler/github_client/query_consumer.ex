@@ -12,13 +12,14 @@ defmodule GithubProfiler.QueryConsumer do
     # Inspect the events.
     IO.inspect(events)
 
-    push_results(socket, query)
+    results = GithubProfiler.Search.run(query).body
+    push_results(socket, results)
 
     # We are a consumer, so we would never emit items.
     {:noreply, [], state}
   end
 
-  defp push_results(socket, query) do
-    Phoenix.Channel.push socket, "results", %{"results" => query}
+  defp push_results(socket, results) do
+    Phoenix.Channel.push socket, "results", %{"results" => results}
   end
 end
