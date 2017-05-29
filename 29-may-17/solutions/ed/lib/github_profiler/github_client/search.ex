@@ -15,10 +15,10 @@ defmodule GithubProfiler.Search do
   end
 
   def graphql_body(query) do
-    # WORKS
-    # ~S"""
-    # {"query":"{\n  search(query: \"eellson\", type: USER, first: 10) {\n    edges {\n      node {\n        ... on User {\n          login\n          name\n          avatarUrl\n        }\n      }\n    }\n  }\n  rateLimit {\n    limit\n    cost\n    remaining\n    resetAt\n  }\n}\n","variables":"{}","operationName":null}
-    # """
-    "{\"query\":\"{\\n  search(query: \\\"#{query}\\\", type: USER, first: 10) {\\n    edges {\\n      node {\\n        ... on User {\\n          login\\n          name\\n          avatarUrl\\n        }\\n      }\\n    }\\n  }\\n  rateLimit {\\n    limit\\n    cost\\n    remaining\\n    resetAt\\n  }\\n}\\n\",\"variables\":\"{}\",\"operationName\":null}\n\n"
+    # I can't get this string to construct correctly unless I have it exactly
+    # like so fml
+    """
+    {\"query\":\"{\\n  search(query: \\\"#{query}\\\", type: USER, first: 10) {\\n    edges {\\n      node {\\n        ... on User {\\n          login\\n          name\\n          avatarUrl\\n        }\\n      }\\n    }\\n  }\\n  rateLimit {\\n    limit\\n    cost\\n    remaining\\n    resetAt\\n  }\\n}\\n\",\"variables\":\"{}\",\"operationName\":null}\n\n
+    """
   end
 end
