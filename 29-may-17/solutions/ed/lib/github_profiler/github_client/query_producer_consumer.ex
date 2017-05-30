@@ -9,7 +9,7 @@ defmodule GithubProfiler.QueryProducerConsumer do
 
   def handle_subscribe(:producer, opts, from, producers) do
     pending = opts[:max_demand] || 1
-    interval = opts[:interval] || 5000
+    interval = opts[:interval] || 1000
 
     producers = Map.put(producers, from, {pending, interval})
     producers = ask_and_schedule(producers, from)
