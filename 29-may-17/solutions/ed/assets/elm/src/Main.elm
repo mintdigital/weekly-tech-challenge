@@ -6,6 +6,7 @@ import Html.Events exposing (onInput)
 import WebSocket
 import Json.Encode exposing (..)
 import Json.Decode exposing (..)
+import Style exposing (..)
 
 main =
   Html.program
@@ -113,6 +114,7 @@ encodePayload payload =
 
 -- VIEW
 
+type alias Styles = List ( String, String )
 
 view : Model -> Html Msg
 view model =
@@ -125,10 +127,40 @@ view model =
 viewResults : List User -> Html Msg
 viewResults users =
   ul []
-  (List.map (\l -> li [] [ h1 [] [text l.name]
-                         , text l.login
-                         , img [src l.avatarUrl] []
-                         ]) users)
+  (List.map (\l -> li [ style userListItem ]
+                      [ img [ src l.avatarUrl, style userThumb ] []
+                      , div [ style userMeta ]
+                            [ h1 [ style userName ] [ text l.name ]
+                            , h2 [ style userLogin ] [ text "@", text l.login ]
+                            ]
+                      ]) users)
+
+
+userListItem : Styles
+userListItem =
+  [ listStyleType none
+  ]
+
+userThumb : Styles
+userThumb =
+  [ Style.width (pc 15)
+  ]
+
+userMeta : Styles
+userMeta =
+  [ Style.width (pc 85)
+  , display "inline-block"
+  ]
+
+userName : Styles
+userName =
+  [ fontSize (Style.em 1.5)
+  ]
+
+userLogin : Styles
+userLogin =
+  [ fontSize (Style.em 1)
+  ]
 
 
 -- SUBSCRIPTIONS
