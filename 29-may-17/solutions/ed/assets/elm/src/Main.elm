@@ -79,8 +79,8 @@ update msg model =
           ({ model | results = results }, Cmd.none)
 
         Err err ->
-          Debug.log err
           Debug.log "not ok"
+          Debug.log err
           (model, Cmd.none)
 
 
