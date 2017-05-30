@@ -41,7 +41,7 @@ config :github_profiler, GithubProfiler.Web.Endpoint,
     ]
   ]
 
-config :github_profiler, :auth_token, "b894da67772837b11d8b723ad057e7f12d6dc3b5"
+config :github_profiler, :auth_token, System.get_env("GITHUB_AUTH_TOKEN")
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
