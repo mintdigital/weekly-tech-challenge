@@ -51,6 +51,7 @@ type alias User =
   { name : String
   , login : String
   , avatarUrl : String
+  , url : String
   }
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -100,11 +101,12 @@ responseDecoder =
 
 userDecoder : Decoder User
 userDecoder =
-  map3
+  map4
     User
     (at ["node", "name"] Json.Decode.string)
     (at ["node", "login"] Json.Decode.string)
     (at ["node", "avatarUrl"] Json.Decode.string)
+    (at ["node", "url"] Json.Decode.string)
 
 encodePayload : String -> Json.Encode.Value
 encodePayload payload =
@@ -128,11 +130,13 @@ viewResults : List User -> Html Msg
 viewResults users =
   ul []
   (List.map (\l -> li [ style userListItem ]
-                      [ img [ src l.avatarUrl, style userThumb ] []
-                      , div [ style userMeta ]
-                            [ h1 [ style userName ] [ text l.name ]
-                            , h2 [ style userLogin ] [ text "@", text l.login ]
-                            ]
+                      [ a [ href l.url ]
+                          [ img [ src l.avatarUrl, style userThumb ] []
+                          , div [ style userMeta ]
+                                [ h1 [ style userName ] [ text l.name ]
+                                , h2 [ style userLogin ] [ text "@", text l.login ]
+                                ]
+                          ]
                       ]) users)
 
 
