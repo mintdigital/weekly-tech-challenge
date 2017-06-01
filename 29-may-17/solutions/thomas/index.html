@@ -1,0 +1,42 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Github Profiler</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <h1>Github profiler</h1>
+        <div id="github-profiler">
+          <input type="text" v-model="username" placeholder="Search for a github user"
+            @keyup="searchUsers">
+          Searching for: {{ username }}
+          <ol v-if="!selectedUser">
+            <li v-for="user in users">
+              <a v-on:click="selectedUser = user.login">{{ user.login }}</router-link>
+            </li>
+          </ol>
+          <div v-if="selectedUser">
+            User: {{ username }}
+            <img :src="profilePic(username)" >
+          </div>
+        </div>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/vue"></script>
+        <script src="js/main.js"></script>
+
+    </body>
+</html>
