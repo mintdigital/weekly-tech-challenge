@@ -9,9 +9,14 @@ var app = new Vue({
     searchUsers: function(ev) {
       this.username = ev.target.value;
 
-      axios.get('https://api.github.com/search/users?q=' + this.username).then(function(resp) {
-        this.users = resp.data.items;
-      }.bind(this));
+      var xhr = new XMLHttpRequest(),
+          self = this;
+      xhr.open('GET', 'https://api.github.com/search/users?q=' + this.username);
+      xhr.onload = function() {
+        var data = JSON.parse(xhr.responseText);
+        self.users = data.items;
+      };
+      xhr.send();
     },
     profilePic: function(username) {
       return this.users.find(function(user) {
