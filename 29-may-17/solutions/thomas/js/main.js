@@ -1,3 +1,16 @@
+Vue.component('user-profile', {
+  props: ['selectedUser', 'users'],
+  template: '<div>User: {{ selectedUser }} <img :src="profilePic" ></div>',
+  computed: {
+    profilePic: function() {
+      var selectedUser = this.selectedUser;
+      return this.users.find(function(user) {
+        return user.login === selectedUser;
+      }).avatar_url;
+    }
+  }
+});
+
 var app = new Vue({
   el: '#github-profiler',
   data: {
@@ -12,17 +25,13 @@ var app = new Vue({
 
       var xhr = new XMLHttpRequest(),
           self = this;
+
       xhr.open('GET', 'https://api.github.com/search/users?q=' + this.searchTerm);
       xhr.onload = function() {
         var data = JSON.parse(xhr.responseText);
         self.users = data.items;
       };
       xhr.send();
-    },
-    profilePic: function(username) {
-      return this.users.find(function(user) {
-        return user.login === username;
-      }).avatar_url;
     }
   }
 });

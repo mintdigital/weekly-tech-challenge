@@ -28,10 +28,8 @@
               <a v-on:click="selectedUser = user.login">{{ user.login }}</router-link>
             </li>
           </ol>
-          <div v-if="selectedUser">
-            User: {{ selectedUser }}
-            <img :src="profilePic(selectedUser)" >
-          </div>
+          <user-profile v-if="selectedUser" :selected-user="selectedUser" :users="users">
+          </user-profile>
         </div>
 
         <script src="https://unpkg.com/vue"></script>
