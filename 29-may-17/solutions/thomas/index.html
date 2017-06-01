@@ -20,17 +20,17 @@
 
         <h1>Github profiler</h1>
         <div id="github-profiler">
-          <input type="text" v-model="username" placeholder="Search for a github user"
+          <input type="text" v-model="searchTerm" placeholder="Search for a github user"
             @keyup="searchUsers">
-          Searching for: {{ username }}
+          Searching for: {{ searchTerm }}
           <ol v-if="!selectedUser">
             <li v-for="user in users">
               <a v-on:click="selectedUser = user.login">{{ user.login }}</router-link>
             </li>
           </ol>
           <div v-if="selectedUser">
-            User: {{ username }}
-            <img :src="profilePic(username)" >
+            User: {{ selectedUser }}
+            <img :src="profilePic(selectedUser)" >
           </div>
         </div>
 

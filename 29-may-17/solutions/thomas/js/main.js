@@ -2,16 +2,17 @@ var app = new Vue({
   el: '#github-profiler',
   data: {
     users: [],
-    username: null,
+    searchTerm: null,
     selectedUser: ''
   },
   methods: {
     searchUsers: function(ev) {
-      this.username = ev.target.value;
+      this.selectedUser = '';
+      this.searchTerm = ev.target.value;
 
       var xhr = new XMLHttpRequest(),
           self = this;
-      xhr.open('GET', 'https://api.github.com/search/users?q=' + this.username);
+      xhr.open('GET', 'https://api.github.com/search/users?q=' + this.searchTerm);
       xhr.onload = function() {
         var data = JSON.parse(xhr.responseText);
         self.users = data.items;
