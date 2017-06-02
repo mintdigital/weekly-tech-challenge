@@ -18,8 +18,8 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <h1>Github profiler</h1>
         <div id="github-profiler">
+          <h1>Github profiler</h1>
           <github-search></github-search>
         </div>
 
@@ -27,7 +27,6 @@
           <div>
             <input type="text" v-model="searchTerm" placeholder="Search for a github user"
               @keyup="searchUsers">
-            Searching for: {{ searchTerm }}
             <ol v-if="!selectedUser">
               <li v-for="user in users">
                 <a v-on:click="selectedUser = user.login">{{ user.login }}</a>

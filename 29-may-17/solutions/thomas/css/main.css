@@ -56,7 +56,11 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
+div#github-profiler {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 
 

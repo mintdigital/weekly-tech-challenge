@@ -1,6 +1,6 @@
 Vue.component('user-profile', {
   props: ['selectedUser', 'users'],
-  template: '<div>User: {{ selectedUser }} <img :src="profilePic" ></div>',
+  template: '<div><p>User: {{ selectedUser }}</p> <img :src="profilePic" ></div>',
   computed: {
     profilePic: function() {
       var selectedUser = this.selectedUser;
