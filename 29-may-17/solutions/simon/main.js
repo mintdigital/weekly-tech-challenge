@@ -15,7 +15,9 @@ const Search = Vue.component('github-search', {
   },
   methods: {
     fetchData: _.debounce(function() {
-      this.$http.get('https://api.github.com/search/users?q=' + this.search).then(response => {
+      this.$http.get(
+        'https://api.github.com/search/users?q=' + this.search
+      ).then(response => {
         this.results = response.data;
       }, response => {
         // HACK: using the 422 response to wipe the data
@@ -43,7 +45,7 @@ const Profile = Vue.component('profile-display', {
       ).then(response => {
         this.user = response.data;
       }, response => {
-        console.raise("Something went wrong!")
+        console.error("Something went wrong!")
       });
     }
   }
