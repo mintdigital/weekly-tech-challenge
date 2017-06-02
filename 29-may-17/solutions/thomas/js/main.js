@@ -10,13 +10,14 @@ Vue.component('user-profile', {
     }
   }
 });
-
-var app = new Vue({
-  el: '#github-profiler',
-  data: {
-    users: [],
-    searchTerm: null,
-    selectedUser: ''
+Vue.component('github-search', {
+  template: '#github-search-template',
+  data: function() {
+    return {
+      users: [],
+      searchTerm: null,
+      selectedUser: ''
+    }
   },
   methods: {
     searchUsers: function(ev) {
@@ -34,4 +35,8 @@ var app = new Vue({
       xhr.send();
     }
   }
+});
+
+var app = new Vue({
+  el: '#github-profiler'
 });
