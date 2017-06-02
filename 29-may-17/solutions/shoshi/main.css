@@ -1,0 +1,156 @@
+/*** RESET ***/
+/*  Adapted from:
+ *  http://meyerweb.com/eric/tools/css/reset/
+ *  v2.0 | 20110126 | License: none (public domain)
+ */
+
+/*  Disabled elements below are no longer supported in HTML5: */
+html, body, div, span, /*applet,*/ object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, /*acronym,*/ address, /*big,*/ cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, /*strike,*/ strong, sub, sup, /*tt,*/ var,
+b, /*u,*/ i, /*center,*/
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, datalist, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+  box-sizing:           border-box;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+ol, ul {
+  list-style: none;
+}
+
+/* Reset > Typography */
+body {
+  line-height: 1;
+}
+pre, code {
+  font-family: monospace;
+}
+
+/* Reset > Controls */
+input, textarea, button{
+  margin: 0;
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+  box-sizing:           border-box;
+  font: inherit;
+}
+
+/* Reset > Tables */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+caption, th, td {
+  font-weight: normal;
+  text-align: left;
+}
+
+/* Reset > Quotes */
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: ''; /* Removes quotes in browsers where `content: none` fails */
+  content: none;
+}
+cite {
+  font-style: normal;
+}
+
+/*** STYLES ***/
+
+/* Layout */
+.site-wrapper {
+  /* No need for a grid here, it's a tiny project */
+  width: 100%;
+  max-width: 760px;
+  padding-left:  20px;
+  padding-right: 20px;
+  margin: 40px auto;
+}
+.push-top {
+  margin-top: 40px;
+}
+
+/* Typography */
+
+html, body {
+  background: #fff;
+  text-align: left;
+}
+body, input, textarea, button {
+  color: #444;
+  font-family: 'VT323', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+  font-size: 26px;
+  line-height: 1.6;
+}
+h1 {
+  font-size: 56px;
+  line-height: 1.1;
+}
+p {
+  color: rgba(0,0,0,0.7);
+}
+
+/* Forms */
+
+input[type=text] {
+  width: 100%;
+  padding: 10px 20px;
+  border: 2px solid #999;
+  -webkit-appearance: none;
+}
+input[type=text]:focus {
+  outline: none;
+  border-color: #444;
+}
+
+/* Modules */
+.mod {
+  padding: 20px;
+  overflow: hidden;
+}
+.mod:nth-of-type(6n-5) {
+  background: #e74c3c;
+}
+.mod:nth-of-type(6n-4) {
+  background: #e67e22;
+}
+.mod:nth-of-type(6n-3) {
+  background: #f1c40f;
+}
+.mod:nth-of-type(6n-2) {
+  background: #2ecc71;
+}
+.mod:nth-of-type(6n-1) {
+  background: #3498db;
+}
+.mod:nth-of-type(6n) {
+  background: #9b59b6;
+}
+.mod img {
+  float: left;
+  width: 40px;
+  height: auto;
+  margin-right: 20px;
+}
+
