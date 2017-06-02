@@ -1,0 +1,2 @@
+%{"benchee": {:hex, :benchee, "0.8.0", "fe93506d05252ad82d72257f6549aab11664088a1307f26f0ab1acb172b8c35b", [:mix], [{:deep_merge, "~> 0.1", [hex: :deep_merge, repo: "hexpm", optional: false]}], "hexpm"},
+  "deep_merge": {:hex, :deep_merge, "0.1.1", "c27866a7524a337b6a039eeb8dd4f17d458fd40fbbcb8c54661b71a22fffe846", [:mix], [], "hexpm"}}
