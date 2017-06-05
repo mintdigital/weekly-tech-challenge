@@ -16,9 +16,9 @@ defmodule GithubProfiler.Web.TypeaheadChannel do
   end
 
   def handle_in("search", %{"query" => query}=payload, socket) do
-    GithubProfiler.QueryProducer.update_query(socket.assigns.producer_pid, query)
+    GithubProfiler.Query.update(socket.assigns.producer_pid, query)
 
-    {:reply, :ok, socket}
+    {:noreply, socket}
   end
 
   # Channels can be used in a request/response fashion
@@ -45,11 +45,11 @@ defmodule GithubProfiler.Web.TypeaheadChannel do
   end
 
   defp setup_genstage(socket) do
-    {:ok, producer} = GithubProfiler.QueryProducer.start_link(
+    {:ok, producer} = GithubProfiler.Query.start_link(
       %{socket: socket, query: ""}
     )
-    {:ok, producer_consumer} = GithubProfiler.QueryProducerConsumer.start_link()
-    {:ok, consumer} = GithubProfiler.QueryConsumer.start_link()
+    {:ok, producer_consumer} = GithubProfiler.QueryRateLimiter.start_link()
+    {:ok, consumer} = GithubProfiler.QueryRunner.start_link()
     GenStage.sync_subscribe(producer_consumer, to: producer)
     GenStage.sync_subscribe(consumer, to: producer_consumer)
     {:ok, producer}
