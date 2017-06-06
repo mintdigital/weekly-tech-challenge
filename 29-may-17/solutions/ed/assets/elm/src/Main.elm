@@ -48,7 +48,7 @@ type alias Send =
   }
 
 type alias User =
-  { name : String
+  { name : Maybe String
   , login : String
   , avatarUrl : String
   , url : String
@@ -103,7 +103,7 @@ userDecoder : Decoder User
 userDecoder =
   map4
     User
-    (at ["node", "name"] Json.Decode.string)
+    (maybe (at ["node", "name"] Json.Decode.string))
     (at ["node", "login"] Json.Decode.string)
     (at ["node", "avatarUrl"] Json.Decode.string)
     (at ["node", "url"] Json.Decode.string)
@@ -133,12 +133,20 @@ viewResults users =
                       [ a [ href l.url ]
                           [ img [ src l.avatarUrl, style userThumb ] []
                           , div [ style userMeta ]
-                                [ h1 [ style userName ] [ text l.name ]
+                                [ h1 [ style userName ] [ maybeText l.name ]
                                 , h2 [ style userLogin ] [ text "@", text l.login ]
                                 ]
                           ]
                       ]) users)
 
+
+maybeText name =
+  case name of
+    Just a ->
+      text a
+
+    Maybe.Nothing ->
+      text ""
 
 userListItem : Styles
 userListItem =
