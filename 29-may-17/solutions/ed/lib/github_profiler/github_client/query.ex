@@ -2,35 +2,16 @@ defmodule GithubProfiler.Query do
   use GenStage
 
   # Client
-  def start_link(%{socket: socket}) do
-    GenStage.start_link(__MODULE__, %{socket: socket})
-  end
+  def start_link(socket), do: GenStage.start_link(__MODULE__, socket)
 
-  def update(pid, query), do: GenStage.cast(pid, {:new_query, query})
+  def update(pid, event), do: GenStage.cast(pid, {:notify, event})
 
   # Server
-  def init(state), do: {:producer, Map.merge(state, %{pending_demand: 0, query: ""})}
+  def init(socket), do: {:producer, socket, buffer_size: 1}
 
-  def handle_cast({:new_query, query}, state) do
-    IO.inspect {"update", query}
-    {:noreply, [%{state | query: query}], %{state | query: query}}
-  end
-
-  def handle_demand(incoming_demand, %{pending_demand: pending_demand}=state) do
-    IO.inspect {incoming_demand, state}
-    dispatch(%{state|pending_demand: incoming_demand + pending_demand}, [])
+  def handle_cast({:notify, event}, socket) do
+    {:noreply, [{socket, event}], socket}
   end
 
-  def dispatch(%{query: ""}=state, events) do
-    IO.puts "blank"
-    IO.inspect events
-    {:noreply, events, state}
-  end
-  def dispatch(%{pending_demand: 0}=state, events) do
-    IO.puts "0 demand"
-    {:noreply, events, state}
-  end
-  def dispatch(%{pending_demand: pending_demand}=state, events) do
-    dispatch(%{state|pending_demand: pending_demand-1, query: ""}, [state|events])
-  end
+  def handle_demand(_demand, state), do: {:noreply, [], state}
 end

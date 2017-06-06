@@ -3,13 +3,13 @@ defmodule GithubProfiler.QueryRunner do
   import Phoenix.Channel, only: [push: 3]
 
   # Client
-  def start_link(), do: GenStage.start_link(__MODULE__, :ok)
+  def start_link(:ok), do: GenStage.start_link(__MODULE__, :ok)
 
   # Server
   def init(:ok), do: {:consumer, :ok}
 
-  def handle_events([%{query: ""}], _from, state), do: {:noreply, [], state}
-  def handle_events([%{socket: socket, query: query}], _from, state) do
+  def handle_events([{_socket, ""}], _from, state), do: {:noreply, [], state}
+  def handle_events([{socket, query}], _from, state) do
     GithubProfiler.Search.run(query).body
     |> push_results(socket)
 

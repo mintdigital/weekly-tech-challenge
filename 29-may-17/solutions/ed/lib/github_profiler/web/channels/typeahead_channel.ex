@@ -45,13 +45,12 @@ defmodule GithubProfiler.Web.TypeaheadChannel do
   end
 
   defp setup_genstage(socket) do
-    {:ok, producer} = GithubProfiler.Query.start_link(
-      %{socket: socket, query: ""}
-    )
-    {:ok, producer_consumer} = GithubProfiler.QueryRateLimiter.start_link()
-    {:ok, consumer} = GithubProfiler.QueryRunner.start_link()
+    {:ok, producer} = GithubProfiler.Query.start_link(socket)
+    {:ok, producer_consumer} = GithubProfiler.QueryRateLimiter.start_link(:ok)
+    {:ok, consumer} = GithubProfiler.QueryRunner.start_link(:ok)
     GenStage.sync_subscribe(producer_consumer, to: producer)
     GenStage.sync_subscribe(consumer, to: producer_consumer)
+    IO.inspect {producer, producer_consumer, consumer}
     {:ok, producer}
   end
 end
