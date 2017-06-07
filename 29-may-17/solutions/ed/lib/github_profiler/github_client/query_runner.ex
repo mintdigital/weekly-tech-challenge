@@ -13,7 +13,6 @@ defmodule GithubProfiler.QueryRunner do
     GithubProfiler.Search.run(query).body
     |> push_results(socket)
 
-    # We are a consumer, so we would never emit items.
     {:noreply, [], state}
   end
 
