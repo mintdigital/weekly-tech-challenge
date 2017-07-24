@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Github Profiler</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.min.css">
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="column column-60 column-offset-20">
+          <div id="profiler">
+            <h3>GitHub Profiler</h3>
+            <router-view></router-view>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/x-template" id="profile-display">
+      <div>
+        <img :src="user.avatar_url" :alt="user.login" />
+        <h4>{{ user.login }}</h4>
+        <small>{{ user.bio }}</small>
+      </div>
+    </script>
+
+    <script type="text/x-template" id="results-display">
+      <!-- Table of Users -->
+      <div>
+        <div>User Count: {{ results.total_count }}</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Username</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="user in results.items">
+              <td>
+                <img :src="user.avatar_url" :alt="user.login" width="100" />
+              </td>
+              <td>
+                {{ user.login }}
+              </td>
+              <td>
+                <router-link :to="user.login">Profile</router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </script>
+
+    <script type="text/x-template" id="github-search">
+      <div>
+        <!-- Search -->
+        <input
+          v-model="search"
+          v-on:keyup="fetchData"
+          type="search"
+          id="search"
+          placeholder="Search for a GitHub User"
+          autocomplete="off">
+
+        <results-display v-if="results" :results="results"></results-display>
+      </div>
+    </script>
+
+    <script src="https://unpkg.com/vue@2.3.3"></script>
+    <script src="https://unpkg.com/vue-resource@1.3.3"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
