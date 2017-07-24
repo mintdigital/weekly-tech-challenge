@@ -1,0 +1,78 @@
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 170px;
+  height: 170px;
+}
+
+.sun,
+.cloud,
+.rain {
+  animation: bounce-in 500ms ease-out forwards;
+  position: absolute;
+  opacity: 0;
+}
+
+.cloud {
+  animation-name: bounce-out;
+  animation-delay: 1000ms;
+  top: 20px;
+}
+
+.rain-container {
+  position: relative;
+  left: 20px;
+  top: 76%;
+}
+
+.rain-1 {
+  animation-delay: 1500ms;
+}
+
+.rain-2 {
+  animation-delay: 1900ms;
+  left: 24px;
+}
+
+.rain-3 {
+  animation-delay: 2300ms;
+  left: 48px;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  33.33% {
+    transform: scale(1);
+  }
+  66.66% {
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-out {
+  0% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+  33.33% {
+    transform: scale(1);
+  }
+  66.66% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
